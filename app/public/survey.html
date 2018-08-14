@@ -7,7 +7,10 @@
     <title>Survey</title>
 </head>
 <body>
-    
+
+    <div class='col-md-4'>
+        <p><a href='/api/friends'>API Friends List</a> | <a href='https://github.com/nolanklinke/FriendFinder' target= '_blank'>GitHub Repo</a></p>
+      </div>    
 
 
 
@@ -35,9 +38,7 @@
                 });
                 return isValid;
             }
-            //if everything is filled
             if (validateForm() == true) {
-                //creates a new friend from the values submitted
                 var newFriend = {
                     name: $('#name').val().trim(),
                     profilePic: $('#photo').val().trim(),
@@ -54,17 +55,12 @@
                         $('#q10').val(),
                     ]
                 };
-                //Grabs current URL of website
                 var currentURL = window.location.origin;
-                //AJAX posts the data to friends API.
                 $.post(currentURL + "/api/friends", newFriend, function(data) {
-                    //Grab the result from the AJAX post so that the best match's name and photo are displayed.
                     $("#matchName").text(data.name);
                     $("#matchPic").attr("src", data.profilePic);
                 });
-                // Show the modal with the best match
                     $('.modal').modal();
-                //clear form after submission
                 $('#name').val("");
                 $('#photo').val("");
                 $('#q1').val("");
@@ -80,7 +76,6 @@
             } else {
                 alert("Please fill out ALL fields before submitting survey!")
             }
-            // return false;
         });
     });
     </script>
